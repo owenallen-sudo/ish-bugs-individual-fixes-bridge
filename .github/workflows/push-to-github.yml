@@ -1,0 +1,23 @@
+me: Pull from CodeTrunk and push to GitHub
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+jobs:
+  pull-from-codetrunk-and-push-to-github:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH environment
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SO_THE_WORKFLOW_WILL_WORK }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+      - name: Clone from CodeTrunk
+        run: |
+          git clone --mirror https://repos.codetrunk.eu/owenallen-sudo/ish-bugs-individual-fixes.git ish-bugs
+          cd ish-bugs
+          git remote add github-repo git@github.com:owenallen-sudo/ish-bugs-individual-fixes.git
+          git push github-owenallen-sudo 'refs/heads/*:refs/heads/*' --force --prune
