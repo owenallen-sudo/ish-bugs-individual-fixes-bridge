@@ -1,4 +1,4 @@
-me: Pull from CodeTrunk and push to GitHub
+name: Pull from CodeTrunk and push to GitHub
 on:
   schedule:
     - cron: '*/15 * * * *'
