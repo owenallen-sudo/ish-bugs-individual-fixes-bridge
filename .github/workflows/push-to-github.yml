@@ -17,7 +17,7 @@ jobs:
           ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
       - name: Clone from CodeTrunk
         run: |
-          git clone --mirror https://repos.codetrunk.eu/owenallen-sudo/ish-bugs-individual-fixes.git ish-bugs
-          cd ish-bugs
+          git clone --mirror https://repos.codetrunk.eu/owenallen-sudo/ish-bugs-individual-fixes.git ish-bugs-indivual-fixes
+          cd ish-bugs-individual-fixes
           git remote add github-repo git@github.com:owenallen-sudo/ish-bugs-individual-fixes.git
-          git push github-owenallen-sudo 'refs/heads/*:refs/heads/*' --force --prune
+          git push github-repo 'refs/heads/*:refs/heads/*' --force --prune
